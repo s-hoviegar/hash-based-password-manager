@@ -33,7 +33,7 @@ const Navigation = () => {
           <Navbar.Brand>
             <Link to="/" style={{ textDecoration: "none", color: "#202020" }}>
               <Logo />
-              <span className="logo-text"> Hash-based Password Mgr</span>
+              <span className="logo-text"> Password Manager</span>
             </Link>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="main-navbar-nav" />

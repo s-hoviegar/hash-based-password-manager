@@ -5,7 +5,7 @@ import {
   createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { ref, child, get } from "firebase/database";
-
+import Spinner from "react-bootstrap/Spinner";
 import AuthContext from "../../store/auth-context";
 import { firebaseAuth } from "../../utils/firebase-config";
 import { firebaseDb } from "../../utils/firebase-config";
@@ -154,7 +154,7 @@ const AuthForm = () => {
         </div>
         <div className={classes.actions}>
           <button disabled={isLoading}>
-            {isLoading && "Sending request..."}
+            {isLoading && <Spinner animation="border" size="sm" />}
             {!isLoading && isLogin && "Login"}
             {!isLoading && !isLogin && "Sign Up"}
           </button>

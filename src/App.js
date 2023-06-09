@@ -2,7 +2,6 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import Home from "./components/Home/Home";
 import About from "./components/About/About";
-import AuthForm from "./components/AuthForm/AuthForm";
 
 function App() {
   return (
