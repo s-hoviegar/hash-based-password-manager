@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Hash-based password manager",
+  "name": "An offline hash-based password manager which doesn't store any password on any cloud storage or remote server. ",
   "icons": [
     {
       "src": "favicon.ico",
