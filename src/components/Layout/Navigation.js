@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -9,12 +9,22 @@ import Modal from "react-bootstrap/Modal";
 import Logo from "./Logo";
 
 import "./Navigation.css";
+import AuthContext from "../../store/auth-context";
 
 const Navigation = () => {
   const [showHelp, setShowHelp] = useState(false);
 
+  const authCtx = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const handleClose = () => setShowHelp(false);
   const handleShow = () => setShowHelp(true);
+
+  const loginHandler = () => {
+    authCtx.isLoggedIn
+      ? authCtx.logout()
+      : navigate("/login", { replace: true });
+  };
 
   return (
     <>
@@ -43,6 +53,13 @@ const Navigation = () => {
               <Nav.Item>
                 <Button variant="outline-dark" onClick={handleShow}>
                   Help
+                </Button>
+              </Nav.Item>
+
+              <Nav.Item>
+                <Button variant="outline-dark" onClick={loginHandler}>
+                  {!authCtx.isLoggedIn && "Login"}
+                  {authCtx.isLoggedIn && "Logout"}
                 </Button>
               </Nav.Item>
             </Nav>
