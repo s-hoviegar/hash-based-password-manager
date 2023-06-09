@@ -1,0 +1,26 @@
+.header {
+  width: 100%;
+  overflow: "hidden";
+  min-width: 0;
+  /* needed for Firefox */
+}
+
+.header button {
+  /* font-weight: bold; */
+  margin: 0.2rem 0.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.navbar,
+.navbar-default {
+  background-image: linear-gradient(
+    to bottom,
+    #ffee32 0,
+    #ffd100 100%
+  ) !important; /* override background image gradient w/ flat color */
+}
+
+.logo-text {
+  color: #202020;
+}
