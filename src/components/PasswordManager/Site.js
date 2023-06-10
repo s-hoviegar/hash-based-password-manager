@@ -7,26 +7,43 @@ import { RiCheckboxBlankCircleFill } from "react-icons/ri";
 
 import Card from "../UI/Card/Card";
 
-const Site = () => {
+const Site = (props) => {
+  const id = props.id;
+  const editHandler = () => {
+    props.handleEdit(props);
+  };
+  const deleteHandler = () => {
+    props.handleDelete(props.id);
+  };
+  const showItemHandler = () => {
+    props.handleShow(props.name);
+  };
+
   return (
     <>
-      <Card>
-        <Container style={{ cursor: "pointer" }}>
+      <Card onClick={showItemHandler}>
+        <Container>
           <Row>
-            <Col xs={8}>
-              <h4 style={{ textAlign: "start" }}>
+            <Col xs={9}>
+              <h5 style={{ textAlign: "start" }}>
                 <span style={{ color: "#FFD100" }}>
                   <RiCheckboxBlankCircleFill />{" "}
                 </span>
-                site1
-              </h4>
+                {props.name}
+              </h5>
             </Col>
-            <Col xs={4}>
+            <Col xs={3}>
               <div style={{ textAlign: "end" }}>
-                <h4 style={{ color: "#202020" }}>
-                  <RiEditBoxFill />
-                  <RiFileReduceFill />
-                </h4>
+                <h5 style={{ color: "#202020" }}>
+                  <RiEditBoxFill
+                    onClick={editHandler}
+                    style={{ cursor: "pointer" }}
+                  />
+                  <RiFileReduceFill
+                    onClick={deleteHandler}
+                    style={{ cursor: "pointer" }}
+                  />
+                </h5>
               </div>
             </Col>
           </Row>

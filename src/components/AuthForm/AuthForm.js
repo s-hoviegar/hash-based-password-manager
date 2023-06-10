@@ -61,6 +61,7 @@ const AuthForm = () => {
 
                 authCtx.login(
                   userCredential._tokenResponse.idToken,
+                  firebaseAuth.currentUser.uid,
                   expirationTime.toISOString(),
                   firebaseAuth.currentUser.emailVerified,
                   true
@@ -70,6 +71,7 @@ const AuthForm = () => {
 
                 authCtx.login(
                   userCredential._tokenResponse.idToken,
+                  firebaseAuth.currentUser.uid,
                   expirationTime.toISOString(),
                   firebaseAuth.currentUser.emailVerified,
                   false
@@ -82,6 +84,7 @@ const AuthForm = () => {
 
               authCtx.login(
                 userCredential._tokenResponse.idToken,
+                firebaseAuth.currentUser.uid,
                 expirationTime.toISOString(),
                 firebaseAuth.currentUser.emailVerified,
                 false
