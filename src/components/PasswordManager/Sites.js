@@ -12,6 +12,8 @@ import AuthContext from "../../store/auth-context";
 import Site from "./Site";
 import classes from "./Sites.module.css";
 import SiteItemForm from "./SiteItemForm";
+import PlaceholderSite from "../UI/Placeholder/PlaceholderSite";
+import Card from "../UI/Card/Card";
 
 const Sites = (props) => {
   const [sites, setSites] = useState([]);
@@ -27,13 +29,8 @@ const Sites = (props) => {
 
   let loadingSites = [];
 
-  for (let i = 0; i < 10; i++) {
-    loadingSites.push(
-      <Col key={i}>
-        {/* <MealItemPlaceholder /> */}
-        <h1>placeholder</h1>
-      </Col>
-    );
+  for (let i = 0; i < 5; i++) {
+    loadingSites.push(<PlaceholderSite key={i} />);
   }
 
   useEffect(() => {
@@ -56,7 +53,7 @@ const Sites = (props) => {
           setSites(loadedSites);
           setIsLoading(false);
         } else {
-          console.log("No data available");
+          // console.log("No data available");
           setIsLoading(false);
         }
       })
@@ -150,6 +147,28 @@ const Sites = (props) => {
     setShowRemoveItemModal(null);
   };
 
+  let sitesResult = null;
+  if (sites.length > 0) {
+    sitesResult = sites.map((site) => {
+      return (
+        <Site
+          key={site.id}
+          id={site.id}
+          name={site.name}
+          handleEdit={showEditItemModal}
+          handleDelete={showRemoveModal}
+          handleShow={showItem}
+        />
+      );
+    });
+  } else if (sites.length === 0) {
+    sitesResult = (
+      <Card>
+        <p>Click on the + icon above to add a few sites to begin.</p>
+      </Card>
+    );
+  }
+
   return (
     <>
       <Container>
@@ -172,19 +191,7 @@ const Sites = (props) => {
               </h1>
             </Col>
           )}
-          {!isLoading &&
-            sites.map((site) => {
-              return (
-                <Site
-                  key={site.id}
-                  id={site.id}
-                  name={site.name}
-                  handleEdit={showEditItemModal}
-                  handleDelete={showRemoveModal}
-                  handleShow={showItem}
-                />
-              );
-            })}
+          {!isLoading && sitesResult}
           {isLoading && loadingSites}
         </Row>
       </Container>
