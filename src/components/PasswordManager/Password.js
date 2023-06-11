@@ -29,7 +29,7 @@ const Password = (props) => {
 
   const calculatePassword = async (site, pass) => {
     const string = site + pass;
-    console.log(string);
+    // console.log(string);
     const result = await sha256(string);
     setPassword(result);
   };

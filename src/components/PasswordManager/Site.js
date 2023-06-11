@@ -8,7 +8,6 @@ import { RiCheckboxBlankCircleFill } from "react-icons/ri";
 import Card from "../UI/Card/Card";
 
 const Site = (props) => {
-  const id = props.id;
   const editHandler = () => {
     props.handleEdit(props);
   };

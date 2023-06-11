@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState, useCallback } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ref, child, update, remove, get } from "firebase/database";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -15,7 +15,6 @@ import SiteItemForm from "./SiteItemForm";
 
 const Sites = (props) => {
   const [sites, setSites] = useState([]);
-  const [sitesChanged, setSitesChanged] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [httpError, setHttpError] = useState();
   const [showItemModal, setShowItemModal] = useState(false);
@@ -24,8 +23,6 @@ const Sites = (props) => {
 
   const authCtx = useContext(AuthContext);
   const isLoggedIn = authCtx.isLoggedIn;
-  const isVerified = authCtx.isVerified;
-  const isAdmin = authCtx.isAdmin;
   const userID = authCtx.userID;
 
   let loadingSites = [];
