@@ -6,24 +6,23 @@ const About = () => {
     <Row>
       <Col></Col>
       <Col xs={7}>
-        <h1>Credits</h1>
-        <h3>Introduction</h3>
+        <h1>Hash-based password manager</h1>
+        <h3>Summary</h3>
 
         <p>
-          The Subtraction Game (One-Heap Game of Nim) is a mathematical
-          turn-based strategy game that involves removing objects from a set.
-          The objective of the game is to be the player who doesn't take the
-          last object. Players take turns removing objects, but they must remove
-          at least one object and at max the number defined in "New Game" page
-          with "Moves" field. The player who takes the last orb, loses the game.
-          So be carefull choosing the objects and make your opponent take the
-          last one! Be aware that you cannot beat the computer if the first turn
-          is set to "Computer".
+          This website offers an offline password manager which doesn't store
+          any of your passwords on a remote server or cloud. It just simply
+          gives you a password for every website you add based on your master
+          password (the one you chose on sign up step) and the site URL. In this
+          way you can easily get unique passwords for each website and get them
+          any time (even offline).
         </p>
         <h3>Creator</h3>
         <p>Sajjad Hoviegar</p>
         <h3>Github</h3>
-        <a href="https://github.com/sh2p/subtraction-game">Subtraction Game</a>
+        <a href="https://github.com/sh2p/hash-based-password-manager">
+          Offline hash-based password manager
+        </a>
       </Col>
       <Col></Col>
     </Row>

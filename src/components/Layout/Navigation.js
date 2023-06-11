@@ -70,7 +70,14 @@ const Navigation = () => {
         <Modal.Header closeButton>
           <Modal.Title>Help</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Lorem ipsum dolor sit...</Modal.Body>
+        <Modal.Body>
+          This website offers an offline password manager which doesn't store
+          any of your passwords on a remote server or cloud. It just simply
+          gives you a password for every website you add based on your master
+          password (the one you chose on sign up step) and the site URL. In this
+          way you can easily get unique passwords for each website and get them
+          any time (even offline).
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close

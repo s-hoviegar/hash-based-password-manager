@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 import { RiEyeFill } from "react-icons/ri";
 import { RiEyeOffFill } from "react-icons/ri";
 import { sha256 } from "crypto-hash";
@@ -9,6 +11,7 @@ import { sha256 } from "crypto-hash";
 import Card from "../UI/Card/Card";
 
 const Password = (props) => {
+  const [showCopied, setShowCopied] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
   const [reenterPassword, setReenterPassword] = useState(false);
@@ -35,6 +38,14 @@ const Password = (props) => {
   };
 
   useEffect(() => {
+    let interval = null;
+    interval = setInterval(() => {
+      setShowCopied(false);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, [showCopied]);
+
+  useEffect(() => {
     setShowPassword(false);
     if (props.masterPassword === "") {
       handleShow();
@@ -49,7 +60,9 @@ const Password = (props) => {
     setShowPassword(false);
   };
   const copyHandler = () => {
-    console.log(passwordRef.current.value);
+    // console.log(passwordRef.current.value);
+    navigator.clipboard.writeText(passwordRef.current.value);
+    setShowCopied(true);
   };
 
   return (
@@ -82,16 +95,27 @@ const Password = (props) => {
               onClick={handleHidePassword}
             />
           )}
-          <Form.Control
-            onClick={copyHandler}
-            ref={passwordRef}
-            size="lg"
-            type={!showPassword ? "password" : "text"}
-            id="password"
-            aria-describedby="passwordHelpBlock"
-            readOnly
-            value={props.site !== "" ? password : "1234isNotSecure"}
-          />
+          <OverlayTrigger
+            key="top"
+            show={showCopied}
+            placement="top"
+            overlay={
+              <Tooltip id={`tooltip-top`}>
+                <strong>Copied</strong> in clipboard.
+              </Tooltip>
+            }
+          >
+            <Form.Control
+              onClick={copyHandler}
+              ref={passwordRef}
+              size="lg"
+              type={!showPassword ? "password" : "text"}
+              id="password"
+              aria-describedby="passwordHelpBlock"
+              readOnly
+              value={props.site !== "" ? password : "1234isNotSecure"}
+            />
+          </OverlayTrigger>
           <Form.Text id="passwordHelpBlock" muted>
             This password is generated for this site and can be obtained any
             time in the future even if you're offline.

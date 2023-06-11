@@ -140,7 +140,7 @@ const Sites = (props) => {
   };
 
   const onDeleteItemHandler = () => {
-    // console.log(`/meals/${showRemoveItemModal}`);
+    // console.log(`/sites/${showRemoveItemModal}`);
     remove(child(ref(firebaseDb), `sites/${userID}/${showRemoveItemModal}`));
 
     const updatedSites = sites.filter((item) => {
