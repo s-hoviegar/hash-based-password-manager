@@ -1,28 +1,45 @@
 import { useEffect, useRef, useState } from "react";
 import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 import { RiEyeFill } from "react-icons/ri";
 import { RiEyeOffFill } from "react-icons/ri";
-import { getSHA256Hash } from "boring-webcrypto-sha256";
+import { sha256 } from "crypto-hash";
 
 import Card from "../UI/Card/Card";
 
 const Password = (props) => {
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
+  const [reenterPassword, setReenterPassword] = useState(false);
+  const [mp, setmp] = useState("");
   const passwordRef = useRef();
+  const masterPasswordRef = useRef();
 
-  const calculatePassword = async () => {
-    const { state, value } = await getSHA256Hash(props.site).then(
-      (result) => result.data
-    );
-    console.log(state, value);
+  const handleClose = () => {
+    if (masterPasswordRef.current.value !== "") {
+      props.setMasterPassword(masterPasswordRef.current.value);
+      setReenterPassword(false);
+    }
+  };
+  const handleShow = () => setReenterPassword(true);
+  const onMPchangeHandler = (event) => {
+    setmp(event.target.value);
+  };
+
+  const calculatePassword = async (site, pass) => {
+    const string = site + pass;
+    console.log(string);
+    const result = await sha256(string);
+    setPassword(result);
   };
 
   useEffect(() => {
     setShowPassword(false);
-    const pass = calculatePassword();
-    console.log(pass);
-    setPassword(pass);
+    if (props.masterPassword === "") {
+      handleShow();
+    }
+    calculatePassword(props.site, props.masterPassword);
   }, [props]);
 
   const handleShowPassword = () => {
@@ -80,6 +97,43 @@ const Password = (props) => {
             time in the future even if you're offline.
           </Form.Text>
         </div>
+
+        <Modal
+          show={reenterPassword}
+          onHide={handleClose}
+          backdrop="static"
+          keyboard={false}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Re-enter Master Password</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            Re-enter your master password and be careful to enter it correctly.
+            If you enter a wrong password you get wrong results!
+            <Form>
+              <Form.Group className="mb-3" controlId="masterPassword">
+                <Form.Label></Form.Label>
+                <Form.Control
+                  required
+                  isInvalid={mp === ""}
+                  onChange={onMPchangeHandler}
+                  defaultValue={mp}
+                  type="password"
+                  placeholder="Master Password"
+                  ref={masterPasswordRef}
+                />
+                <Form.Control.Feedback type="invalid">
+                  Plaese enter your master password to continue.
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" onClick={handleClose}>
+              Enter
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </Card>
     </>
   );

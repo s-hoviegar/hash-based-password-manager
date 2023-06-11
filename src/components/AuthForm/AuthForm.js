@@ -11,7 +11,7 @@ import { firebaseAuth } from "../../utils/firebase-config";
 import { firebaseDb } from "../../utils/firebase-config";
 import classes from "./AuthForm.module.css";
 
-const AuthForm = () => {
+const AuthForm = (props) => {
   const navigate = useNavigate();
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
@@ -30,6 +30,8 @@ const AuthForm = () => {
 
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
+
+    props.masterPasswordSaver(enteredPassword);
 
     // optional: Add validation
 

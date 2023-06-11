@@ -5,10 +5,14 @@ import Sites from "./Sites";
 import Password from "./Password";
 import { useState } from "react";
 
-const PasswordManager = () => {
+const PasswordManager = (props) => {
   const [site, setSite] = useState("");
   const handleItemShow = (site) => {
     setSite(site);
+  };
+
+  const setMasterPasswordHandler = (value) => {
+    props.handleSetMasterPassword(value);
   };
 
   return (
@@ -18,7 +22,11 @@ const PasswordManager = () => {
           <Sites showItemPassword={handleItemShow} />
         </Col>
         <Col sm={8}>
-          <Password site={site} />
+          <Password
+            site={site}
+            masterPassword={props.masterPassword}
+            setMasterPassword={setMasterPasswordHandler}
+          />
         </Col>
       </Row>
     </Container>
