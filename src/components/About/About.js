@@ -20,7 +20,7 @@ const About = () => {
         <h3>Creator</h3>
         <p>Sajjad Hoviegar</p>
         <h3>Github</h3>
-        <a href="https://github.com/sh2p/hash-based-password-manager">
+        <a href="https://github.com/s-hoviegar/hash-based-password-manager">
           Offline hash-based password manager
         </a>
       </Col>
