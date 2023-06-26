@@ -173,7 +173,8 @@ const Sites = (props) => {
     <>
       <Container>
         <Row>
-          <Col xs={10}>
+          <Col xs={2}> </Col>
+          <Col xs={8}>
             {" "}
             <h1>List Of Sites</h1>
           </Col>
@@ -233,7 +234,7 @@ const Sites = (props) => {
                     size="lg"
                     onClick={onDeleteItemHandler}
                   >
-                    Delete item
+                    Delete
                   </Button>
                 </div>
               </Col>
